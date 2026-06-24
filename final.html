@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project Proposal</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 简易图片适配样式，不用改外部css也能正常显示 */
+        .project-img {
+            width: 100%;
+            max-width: 1200px;
+            display: block;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -21,22 +31,24 @@
 
     <section>
         <h3>1. Parkinson’s Anti-Tremor Tableware Helper</h3>
-        <p>This arm-mounted tool contains a 3D printed frame, foam padding, contact sensor, DC motor, LED lights, and piezoelectric buzzer. Padding sits between the frame and user’s arm to limit hand displacement during eating. The contact sensor records grip force values from the user’s hand. When recorded values drop below a fixed threshold, the sensor sends signals to activate the motor. The motor locks chopsticks or spoons to the frame to stop sliding movement. Light sensors connect to LED lights. LED lights receive trigger signals and turn on when surrounding light levels drop below a set value. The buzzer outputs audio signals to deliver reminders to users. This project outputs a device for daily use. Construction uses entry-level manufacturing techniques. The device serves users with involuntary hand movement conditions to access assistive equipment for independent eating.</p>
+
+        <img src="parkinson-device.png" alt="Parkinson’s Assist Device structural diagram with labeled parts" class="project-img">
+        <p>This arm-mounted device is designed to assist individuals with Parkinson's disease in maintaining independence during meals. It features a 3D-printed frame, soft foam padding, a contact sensor, a DC motor. The padding gently cradles the user's arm, minimizing involuntary hand movements while eating. A contact sensor continuously monitors grip strength; should it fall below a predetermined threshold, the motor activates to securely lock chopsticks or spoons in place, preventing them from slipping.</p>
     </section>
 
     <section>
         <h3>2. Wearable Reading Magnifier</h3>
-        <p>This head-mounted device carries optical lenses, light sensors, control buttons, LED lights, and hinge structures. Light sensors record surrounding light levels. Buttons send signals to adjust power output for LED lights. Hinge structures control lens position angles. The device supports text reading from paper books and digital display screens for users with vision impairment.</p>
+        <p>This head-mounted device offers enhanced reading support for individuals with vision impairment. It incorporates optical lenses, light sensors, control buttons, LED lights, and adjustable hinge structures. The light sensors detect ambient light conditions, while control buttons allow users to easily adjust the LED lights' brightness. Flexible hinge structures enable precise positioning of the lenses to suit individual needs. This device is designed to make reading both paper books and digital screens more comfortable and accessible.</p>
     </section>
 
     <section>
         <h3>3. Posture Correction Wearable Device</h3>
-        <p>This back-mounted device integrates position sensors, vibration motors, and indicator lights. Position sensors track spinal angle data. When tracked angles exceed preset range limits, sensors activate vibration motors. Vibration motors generate vibration signals to notify users. The device reduces physical strain from long periods of screen viewing and desk study.</p>
+        <p>Designed to promote better posture, this back-mounted device integrates position sensors, vibration motors, and indicator lights. The position sensors continuously track spinal alignment. If the monitored angles exceed predefined healthy limits, the sensors trigger the vibration motors. These motors then generate gentle vibration signals to discreetly alert the user to adjust their posture. This device aims to alleviate physical strain often associated with prolonged screen time and desk work.</p>
     </section>
 
     <div class="preferred-project">
         <h3>My Preferred Project</h3>
-        <p>I select the Parkinson’s Anti-Tremor Tableware Helper among the three proposals. The device supports users with Parkinson’s disease to complete meal intake without assistance from other people.</p>
+        <p>Among these three proposals, I've chosen the Parkinson’s Anti-Tremor Tableware Helper. This device holds significant promise in enabling individuals with Parkinson's disease to manage their meal intake independently, fostering greater autonomy and dignity in their daily lives.</p>
     </div>
 </main>
 
