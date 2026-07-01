@@ -3,21 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 3 Assignment</title>
+    <title>Week 3: Kinetic Sculpture</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 24px;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        h1 {
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 32px;
+        }
+        p {
+            margin: 22px 0;
+        }
+        nav a {
+            margin-right: 16px;
+            font-size: 17px;
+        }
+        .img-full {
+            width: 700px;
+            margin: 15px 0 5px;
+        }
+        .caption {
+            font-size: 16px;
+            color: #444;
+            margin: 0 0 25px;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <h1>Week 3 Assignment</h1>
+    <h1>Week 3 — Kinetic Sculpture (Crank‑Slider Piston Mechanism)</h1>
     <nav>
         <a href="index.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="final.html">Final Project Proposal</a>
+        <a href="about.html">About</a>
+        <a href="week3.html">Week 3</a>
+        <a href="final.html">Final Project</a>
     </nav>
 </header>
+
 <main>
-    <h2>Weekly Lab Notes & Work</h2>
-    <p></p>
+    <h2>Project Concept</h2>
+    <p>For this kinetic‑sculpture assignment, I built a crank‑slider piston‑style mechanism. It replicates the working principle of a cylinder‑piston system. Two hinged linkage arms are connected by a custom‑designed pivot bolt. The sliding block is constrained to only move horizontally inside a fixed outer frame. A DC‑motor‑driven crank will spin the linkage, which pushes the inner block to slide repeatedly back and forth.</p>
+
+    <img src="crank‑slider‑fusion.png" class="img-full" alt="Fusion 360 model of the crank‑slider piston mechanism">
+    <p class="caption">My Fusion‑360 assembly of the linkage, sliding block and outer frame for the piston kinetic sculpture.</p>
+
+    <img src="bolt‑fusion.png" class="img-full" alt="Custom pivot bolt modelled in Fusion 360">
+    <p class="caption">Custom‑made threaded bolt, which acts as the pivot pin to connect the two linkage arms at the hinge joint.</p>
+
+    <h2>Manufacturing & Assembly Plan</h2>
+    <ol>
+        <li>Cut the acrylic frame, sliding block and linkage arms at the saw station; smooth edges using hand files and the bench grinder.</li>
+        <li>Drill mounting holes on each component and tap threads for the pivot bolt at the drill station.</li>
+        <li>3D‑print the custom pivot bolt modelled in Fusion 360, then assemble the linkages with the bolt.</li>
+        <li>Solder header pins onto my Arduino microcontroller, then wire up the DC‑motor power circuit.</li>
+        <li>Mount the motor, attach it to the linkage crank, then test the full horizontal piston‑style motion.</li>
+    </ol>
+
+    <h2>Documentation Plan</h2>
+    <p>Once the physical sculpture is fully assembled, I will record a short video/GIF of the working piston‑style movement, then embed the video on this webpage to document the full project process.</p>
 </main>
 </body>
 </html>
