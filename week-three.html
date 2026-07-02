@@ -47,7 +47,7 @@
 
 <main>
     <h2>Project Concept</h2>
-    <p>For this kinetic‑sculpture assignment, I built a crank‑slider piston‑style mechanism. It replicates the working principle of a cylinder‑piston system. Two hinged linkage arms are connected by a custom‑designed pivot bolt. The sliding block is constrained to only move horizontally inside a fixed outer frame. A DC‑motor‑driven crank will spin the linkage, which pushes the inner block to slide repeatedly back and forth.</p>
+    <p>For this kinetic‑sculpture assignment, I built a crank‑slider piston‑style mechanism. It replicates the working principle of a cylinder‑piston system. Two hinged linkage arms are connected by a custom‑designed pivot bolt. The sliding block is constrained to only move horizontally inside a fixed outer frame. A DC‑motor‑driven crank will spin the linkage, which pushes the inner block to slide repeatedly back and forth. This structure turns the motor’s circular rotation into periodic linear reciprocating motion through two wooden linkages. I plan to add more creative expansions to this base design. One idea is to adjust the whole linkage so it swings like a human arm. Another interesting extension is adding a third sliding plate with inclined guide slots to drive petal-shaped cutouts. As the third plate slides back and forth horizontally, the petals will open and close repeatedly, creating a blooming flower effect.</p>
 
     <img src="crank‑slider‑fusion.png" class="img-full" alt="Fusion 360 model of the crank‑slider piston mechanism">
     <p class="caption">My Fusion‑360 assembly of the linkage, sliding block and outer frame for the piston kinetic sculpture.</p>
@@ -60,10 +60,12 @@
     <img src="theory.jpg" class="img-full" alt="Mathematical derivation of motor output torque as a function of time">
     <p class="caption">Derivation sheet for time-varying motor torque in the crank-slider piston mechanism.</p>
 
-    <h2>Manufacturing & Assembly Plan</h2>
+    <h2>Manufacturing &amp; Assembly Plan</h2>
     <ol>
         <li>Cut the acrylic frame, sliding block and linkage arms at the saw station; smooth edges using hand files and the bench grinder.</li>
         <li>Drill mounting holes on each component and tap threads for the pivot bolt at the drill station.</li>
+        <li>3D‑print the custom pivot bolt modelled in Fusion 360, then assemble the linkages with the bolt.</li>
+        <li>Solder header pins onto my Arduino microcontroller, then wire up the DC‑motor power circuit.</li>
         <li>Mount the motor, attach it to the linkage crank, then test the full horizontal piston‑style motion.</li>
     </ol>
 
@@ -77,6 +79,8 @@
             allowfullscreen>
         </iframe>
     </div>
-   
+    <p class="caption">Full working demonstration short of my crank-slider piston kinetic sculpture hosted on YouTube.</p>
+
+</main>
 </body>
 </html>
