@@ -16,10 +16,21 @@
             color: #444;
             margin: 0 0 25px;
         }
-        video {
+        /* YouTube Shorts 响应式容器，宽度700px，9:16竖屏比例 */
+        .shorts-container {
             width: 700px;
             margin: 15px 0 5px;
-            display: block;
+            position: relative;
+            padding-bottom: 177.77%; /* 9/16=0.5625 倒数1.7777 */
+            height: 0;
+        }
+        .shorts-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -59,15 +70,20 @@
     </ol>
 
     <h2>Final Working Demonstration</h2>
-    <p>This video shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
-    <video controls>
-        <source src="video.mp4" type="video/mp4">
-        Your browser cannot play this MP4 video.
-    </video>
-    <p class="caption">Full working demonstration video of my crank-slider piston kinetic sculpture.</p>
+    <p>This YouTube short shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
+    <!-- YouTube Shorts 嵌入代码 -->
+    <div class="shorts-container">
+        <iframe 
+            src="https://www.youtube.com/embed/Rmoet63mSiw"
+            title="Kinetic Sculpture Working Demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </div>
+    <p class="caption">Full working demonstration short of my crank-slider piston kinetic sculpture hosted on YouTube.</p>
 
     <h2>Documentation Plan</h2>
-    <p>I have recorded and embedded a demonstration video of the finished mechanical sculpture on this page to document the complete project workflow, from CAD design and theoretical analysis to physical fabrication and functional testing.</p>
+    <p>I have embedded a YouTube short demonstration of the finished mechanical sculpture on this page to document the complete project workflow, from CAD design and theoretical analysis to physical fabrication and functional testing.</p>
 </main>
 </body>
 </html>
