@@ -3,43 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3: Kinetic Sculpture</title>
+    <!-- 引用你原本外部CSS，完全不变 -->
     <link rel="stylesheet" href="style.css">
     <style>
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 24px;
-            line-height: 1.8;
-            font-size: 18px;
-        }
-        h1 {
-            border-bottom: 2px solid #222;
-            padding-bottom: 10px;
-        }
-        h2 {
-            margin-top: 32px;
-        }
-        p {
-            margin: 22px 0;
-        }
-        nav a {
-            margin-right: 16px;
-            font-size: 17px;
-        }
+        /* 仅页面局部补充，不会覆盖/修改你的外部style.css */
         .img-full {
             width: 700px;
             margin: 15px 0 5px;
+            display: block;
         }
         .caption {
             font-size: 16px;
             color: #444;
             margin: 0 0 25px;
         }
-        /* 视频样式，和图片宽度统一 */
-        video.img-full {
-            display: block;
+        /* 视频专属样式，和图片宽度对齐，仅当前页面生效 */
+        video {
             width: 700px;
             margin: 15px 0 5px;
+            display: block;
         }
     </style>
 </head>
@@ -49,7 +32,6 @@
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="week3.html">Week 3</a>
         <a href="final.html">Final Project</a>
     </nav>
 </header>
@@ -80,10 +62,10 @@
 
     <h2>Final Working Demonstration</h2>
     <p>This video shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
-
-    <video class="img-full" controls>
+    <!-- 本地video.mp4播放标签 -->
+    <video controls>
         <source src="video.mp4" type="video/mp4">
-        Your browser does not support MP4 video playback.
+        Your browser cannot play this MP4 video.
     </video>
     <p class="caption">Full working demonstration video of my crank-slider piston kinetic sculpture.</p>
 
