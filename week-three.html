@@ -32,6 +32,14 @@
             height: 100%;
             border: none;
         }
+        pre {
+            width: 700px;
+            background: #f5f5f5;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +76,51 @@
         <li>Solder header pins onto my Arduino microcontroller, then wire up the DC‑motor power circuit.</li>
         <li>Mount the motor, attach it to the linkage crank, then test the full horizontal piston‑style motion.</li>
     </ol>
+
+    <h2>Circuit Wiring Diagram</h2>
+    <p>The control circuit uses a 10k pull-down resistor button to toggle motor running state, hardware wiring as shown below.</p>
+    <img src="dianlulianjie.png" class="img-full" alt="Circuit wiring diagram of XIAO ESP32-C3 with pull-down button">
+    <p class="caption">Pull-down resistor button circuit diagram for motor start/stop control.</p>
+
+    <h2>Controller Source Code</h2>
+    <p>The firmware runs on Seeed Studio XIAO ESP32-C3, implements one-button toggle between motor running and stop state, no speed adjustment function.</p>
+<pre>
+const int buttonPin = D6;
+const int A1A = D9;
+const int A1B = D8;
+
+bool motorRunning = true;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(A1A, OUTPUT);
+  pinMode(A1B, OUTPUT);
+  pinMode(buttonPin, INPUT);
+
+  digitalWrite(A1A, HIGH);
+  digitalWrite(A1B, LOW);
+}
+
+void loop() {
+  int btnVal = digitalRead(buttonPin);
+  if (btnVal == HIGH) {
+    delay(30);
+    if (digitalRead(buttonPin) == HIGH) {
+      motorRunning = !motorRunning;
+      if (motorRunning) {
+        digitalWrite(A1A, HIGH);
+        digitalWrite(A1B, LOW);
+      } else {
+        digitalWrite(A1A, LOW);
+        digitalWrite(A1B, LOW);
+      }
+      while (digitalRead(buttonPin) == HIGH);
+      delay(30);
+    }
+  }
+}
+</pre>
+    <p class="caption">Arduino firmware for motor state toggle control, compatible with pull-down resistor button circuit.</p>
 
     <h2>Final Working Demonstration</h2>
     <p>This Bilibili video shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
