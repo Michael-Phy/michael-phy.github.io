@@ -16,15 +16,15 @@
             color: #444;
             margin: 0 0 25px;
         }
-        /* YouTube Shorts 响应式容器，宽度700px，9:16竖屏比例 */
-        .shorts-container {
+        /* B站视频通用容器 16:9标准横屏 */
+        .video-container {
             width: 700px;
             margin: 15px 0 5px;
             position: relative;
-            padding-bottom: 177.77%; /* 9/16=0.5625 倒数1.7777 */
+            padding-bottom: 56.25%; /* 16:9比例 9/16=0.5625 */
             height: 0;
         }
-        .shorts-container iframe {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -70,16 +70,15 @@
     </ol>
 
     <h2>Final Working Demonstration</h2>
-    <p>This YouTube short shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
-    <div class="shorts-container">
+    <p>This Bilibili video shows the fully assembled kinetic sculpture running. The crank-slider piston reciprocates horizontally as the DC motor drives the linkage system.</p>
+    <div class="video-container">
         <iframe 
-            src="https://www.youtube.com/embed/Rmoet63mSiw"
+            src="https://player.bilibili.com/player.html?bvid=BV1LNMa6BEx2&page=1"
             title="Kinetic Sculpture Working Demo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
         </iframe>
     </div>
-    <p class="caption">Full working demonstration short of my crank-slider piston kinetic sculpture hosted on YouTube.</p>
+    <p class="caption">Full working demonstration video of my crank-slider piston kinetic sculpture hosted on Bilibili.</p>
 
 </main>
 </body>
