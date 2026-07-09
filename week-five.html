@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 5 Assignment</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .img-full {
+            width: 750px;
+            margin: 16px 0 6px;
+            display: block;
+            border: 1px solid #ddd;
+        }
+        .caption {
+            font-size: 15px;
+            color: #444;
+            margin: 0 0 28px;
+        }
+        .download-link {
+            display: block;
+            margin: 8px 0;
+            font-size: 17px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -13,10 +31,28 @@
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
         <a href="final.html">Final Project Proposal</a>
+        <a href="week-five.html">Week 5</a>
     </nav>
 </header>
 <main>
     <h2>Weekly Lab Notes & Work</h2>
+
+    <h3>Task 1: Custom 3D Printed Pivot Bolt for Crank-Slider Mechanism</h3>
+    <p>This custom threaded bolt is a core mechanical component of my kinetic sculpture crank-slider piston assembly. Its internal hex cavity and continuous external thread cannot be easily manufactured via subtractive milling/cutting methods, which meets the assignment requirements.</p>
+
+    <!-- Fusion360 CAD Model Screenshot -->
+    <img src="fusion_bolt_model.png" class="img-full" alt="Fusion 360 CAD model of custom pivot bolt">
+    <p class="caption">Figure 1: Full parametric CAD design of the threaded pivot bolt inside Fusion 360.</p>
+
+    <!-- PrusaSlicer Slicing Preview Screenshot -->
+    <img src="prusaslicer_slice_preview.png" class="img-full" alt="PrusaSlicer layer preview of bolt print">
+    <p class="caption">Figure 2: Slicing preview in PrusaSlicer, estimated print time 5 hours 21 minutes, with skirt support for bed adhesion.</p>
+
+    <h3>Downloadable 3D Print Design Files</h3>
+    <p>Three required files for this 3D printing assignment are available below for download:</p>
+    <a class="download-link" download href="./pivot_bolt.f3z">Download Fusion 360 Source File (.f3z)</a>
+    <a class="download-link" download href="./pivot_bolt.stl">Download Printable Mesh Model (.STL)</a>
+    <a class="download-link" download href="./pivot_bolt_sliced.gcode">Download Sliced Printer G-code File</a>
 </main>
 </body>
 </html>
