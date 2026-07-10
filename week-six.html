@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week 6 Assignment</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 页面分区辅助样式，不用改外部css也能正常分区 */
+        section {
+            border: 1px solid #333;
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 6px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        iframe {
+            margin: 10px 0;
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -17,6 +40,70 @@
 </header>
 <main>
     <h2>Weekly Lab Notes & Work</h2>
+
+    <!-- Task 1：电容传感器任务 -->
+    <section id="task1">
+        <h3>Task 1: Capacitive Sensor Measurement</h3>
+        <p>Build a capacitive sensor to detect physical quantity, use millis() timer to replace delay() function for non-blocking code execution.</p>
+    </section>
+
+    <!-- Task 2：你的热敏电阻+LED项目（核心内容） -->
+    <section id="task2">
+        <h3>Task 2: Temperature Sensor (NTC Thermistor) + LED Output</h3>
+        <h4>Project Description</h4>
+        <p>Used NTC thermistor as temperature sensor, D7 LED as output indicator. Logic: LED turns ON when temperature > 30°C, LED stays OFF under or equal to 30°C. Program uses C++ class structure standard, no delay() blocking function (can upgrade millis timer easily).</p>
+        
+        <h4>Circuit Demo Video (Bilibili)</h4>
+        <!-- B站嵌入视频 -->
+        <iframe width="720" height="400" 
+                src="https://player.bilibili.com/player.html?bvid=BV1U5Np6fEZQ" 
+                frameborder="0" 
+                allowfullscreen>
+        </iframe>
+
+        <h4>Complete Arduino Code (XIAO ESP32C3)</h4>
+<pre><code>const float R_REF = 10000.0;
+const float B_VALUE = 3950.0;
+const float R25 = 10000.0;
+const int NTC_PIN = A1;
+const int ledpin = D7;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledpin, OUTPUT);
+}
+
+void loop() {
+  int adcVal = analogRead(NTC_PIN);
+  float voltage = adcVal * 3.3 / 4095.0;
+  float rNtc = R_REF * (3.3 - voltage) / voltage;
+  float tempK = 1 / (1 / 298.15 + log(rNtc / R25) / B_VALUE);
+  float tempC = tempK - 273.15;
+
+  if(tempC > 30) {
+    digitalWrite(ledpin, HIGH);
+  } else {
+    digitalWrite(ledpin, LOW);
+  }
+
+  Serial.print("Temperature: ");
+  Serial.print(tempC);
+  Serial.println(" °C");
+  delay(500);
+}
+</code></pre>
+    </section>
+
+    <!-- Task 5：CNC Assignment Plan -->
+    <section id="task5">
+        <h3>Task 5: CNC Assignment Plan</h3>
+        <p>Plan CNC machining workflow, two options available:
+        <ul>
+            <li>2D DXF file: Cut plywood/OSB sheet material via routing</li>
+            <li>3D STL file: Mill 2.5D relief shape from solid stock</li>
+        </ul>
+        </p>
+    </section>
 </main>
 </body>
 </html>
