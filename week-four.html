@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 4: Arduino & Circuit Programming Notes</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
+    <meta charset="UTF-8<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   Week 4: Arduino &amp; Circuit
+<link rel="stylesheet" href="style.css"><style>
         .img-full {
             width: 700px;
             margin: 15px 0 5px;
@@ -35,146 +31,67 @@
             margin-top: 0;
             color: #205899;
         }
-    </style>
-</head>
-<body>
-<header>
-    <h1>Week 4 — Arduino & Circuit Programming Notes</h1>
+    </head><header<h1>Week 4 — Arduino &amp; Circuit Programming Notes</h1>
     <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="week-three.html">Week 3</a>
-    <a href="week-four.html">Week 4</a>
-    <a href="final.html">Final Project</a>
-    </nav>
-</header>
+    <a href="index.html"></a>
+   <a href="about.html</a>
+<a href="week-three.html">Week 3</a>
+    <a href="week-four.html">Week 4<a href="final.html">Final Project</a>
+    </header><main>
+   <h2>Button Controlled</h2<p>This basic Arduino circuit uses a push button and LED to realize manual light control based on XIAO ESP32-C3 microcontroller. The LED lights up when pressing the button and turns off when releasing the button.</p>
 
-<main>
-    <h2>Control Circuit for Crank-Slider Kinetic Sculpture</h2>
-    <p>This hardware circuit uses a 10k external pull-down resistor pushbutton to toggle DC motor operation, based on XIAO ESP32-C3 microcontroller.</p>
+    <h3>Circuit Wiring</h3>
+<img src="10.jpg" class="img-full" alt="Overall breadboard circuit wiring">
+   <p class="caption">Overall view of button and LED</p>
 
-    <h3>Circuit Wiring Diagram</h3>
-    <img src="dianlulianjie.png" class="img-full" alt="Circuit wiring diagram of XIAO ESP32-C3 with pull-down button">
-    <p class="caption">Pull-down resistor button circuit diagram for motor start/stop toggle control.</p>
-
-    <h3>Motor Toggle Controller Source Code</h3>
-    <p>Firmware for XIAO ESP32-C3, single button to switch motor running status, no speed adjustment feature.</p>
-<pre>
-const int buttonPin = D6;
-const int A1A = D9;
-const int A1B = D8;
-
-bool motorRunning = true;
+<img src="20.jpg" class="img-full" alt="Circuit wiring detail and experiment display"><p class="caption">Detailed wiring and working status of the control circuit.<h3>Button Control LED Source</h3>
+    <p>Pure functional uncommented firmware for XIAO ESP32-C3, D5 for button input, D7 for LED output.<pre>
+const int LED_PIN = D7;
+const int BUTTON_PIN = D5;
 
 void setup() {
-  Serial.begin(115200);
-  pinMode(A1A, OUTPUT);
-  pinMode(A1B, OUTPUT);
-  pinMode(buttonPin, INPUT);
-
-  digitalWrite(A1A, HIGH);
-  digitalWrite(A1B, LOW);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
 
 void loop() {
-  int btnVal = digitalRead(buttonPin);
-  if (btnVal == HIGH) {
-    delay(30);
-    if (digitalRead(buttonPin) == HIGH) {
-      motorRunning = !motorRunning;
-      if (motorRunning) {
-        digitalWrite(A1A, HIGH);
-        digitalWrite(A1B, LOW);
-      } else {
-        digitalWrite(A1A, LOW);
-        digitalWrite(A1B, LOW);
-      }
-      while (digitalRead(buttonPin) == HIGH);
-      delay(30);
-    }
-  }
-}
-</pre>
-    <p class="caption">Arduino firmware for motor state toggle control, matched with external pull-down button circuit.</p>
+  int buttonState = digitalRead(BUTTON_PIN);
+  if (buttonState == LOW) {
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+ </pre<p class="caption">Program logic: Press D5 button to turn on D7 LED, release to turn off LED, using internal pull-up resistor mode.<hr style="width:700px;margin:35px 0;">
 
-    <hr style="width:700px;margin:35px 0;">
+   <h2>Comprehensive</h<div class="note-card">
+<h4>1. Core Program Structure (Two</h4<ul><code</code>: Runs exactly once after power on / upload; used for pin initialization, serial port configuration,</li>
+<code></code>: Executes repeatedly in infinite cycle; main logic for sensor reading, actuator control, state judgment.</ul</div><div class="note-card">
+        <h4>2. Pin</h4<ul><code>pinMode(pinNum</code>: Set pin as digital output, output HIGH(3.3V) / LOW(0V) via digitalWrite.<li<code>pinMode(p</code>: Standard input, rely on external pull-up / pull-down resistors (used in our</li>
+<code>pinMode(pinNum,</code>: Enable internal built-in pull-up resistor, no external resistor</li><code>analogRead(pin</code>: Only works for analog pins, returns integer 0~4095</li></ul>
+</div>
 
-    <h2>Comprehensive Arduino Programming Learning Notes</h2>
-
-    <div class="note-card">
-        <h4>1. Core Program Structure (Two Mandatory Functions)</h4>
-        <ul>
-            <li><code>void setup()</code>: Runs exactly once after power on / upload; used for pin initialization, serial port configuration, library attachment.</li>
-            <li><code>void loop()</code>: Executes repeatedly in infinite cycle; main logic for sensor reading, actuator control, state judgment.</li>
-        </ul>
-    </div>
-
-    <div class="note-card">
-        <h4>2. Pin Mode Configuration Rules</h4>
-        <ul>
-            <li><code>pinMode(pinNum, OUTPUT)</code>: Set pin as digital output, output HIGH(3.3V) / LOW(0V) via digitalWrite.</li>
-            <li><code>pinMode(pinNum, INPUT)</code>: Standard input, rely on external pull-up / pull-down resistors (used in our button circuit).</li>
-            <li><code>pinMode(pinNum, INPUT_PULLUP)</code>: Enable internal built-in pull-up resistor, no external resistor needed for buttons.</li>
-            <li><code>analogRead(pin)</code>: Only works for analog pins, returns integer 0~4095 representing input voltage.</li>
-        </ul>
-    </div>
-
-    <div class="note-card">
-        <h4>3. Digital Read & Button Logic (Pull-Down Circuit Focus)</h4>
-        <p>For external 10k pull-down resistor circuit:</p>
-        <ul>
-            <li>Button released: Pin connected to GND through resistor → <code>digitalRead() == LOW</code></li>
-            <li>Button pressed: Pin connected to 3.3V power rail → <code>digitalRead() == HIGH</code></li>
-            <li>Mechanical jitter elimination: Double delay detection + wait-for-release while loop to avoid multiple triggers from one press.</li>
-        </ul>
-    </div>
-
-    <div class="note-card">
-        <h4>4. Boolean State Toggle Principle</h4>
-        <p>Use bool variable to store device running state, flip state with <code>var = !var</code></p>
-<pre>
+   <div class="note-card<h4>3. Digital Read &amp; Button Logic (Pull</h4>
+        <p>For external 10k pull-down resistor circuit:<ul<li>Button released: Pin connected to GND through resistor → <code>digitalRead() ==</li><li>Button pressed: Pin connected to 3.3V power rail<code>digitalRead() == HIGH</code><li>Mechanical jitter elimination: Double delay detection + wait-for-release while loop to avoid multiple triggers from one press.</ul</div><div class="note-card">
+        <h4>4. Boolean</h4<p>Use bool variable to store device running state, flip state with<code>var = !</p><pre>
 bool motorRunning = true;
 // Trigger once per button press
-motorRunning = !motorRunning;
-</pre>
-        <p>When <code>motorRunning = true</code>: Motor forward rotation; When false: Both control pins pull low to cut power and stop motor.</p>
-    </div>
+motorRunning = !motorRunning</pre>
+        <p>When <code>motorRunning = true</code>: Motor forward rotation; When false: Both control pins pull low to cut power</p></div>
 
-    <div class="note-card">
-        <h4>5. Serial Communication Debugging</h4>
-        <ul>
-            <li><code>Serial.begin(baudRate)</code>: Initialize serial port, 115200 is common baud rate for ESP32 series.</li>
-            <li><code>Serial.print()</code> / <code>Serial.println()</code>: Print variable values to serial monitor for hardware debugging.</li>
-        </ul>
-    </div>
+<div class="note<h4>5. Serial Communication</h4><ul>
+<code>Serial.begin(baudRate</code>: Initialize serial port, 115200 is common baud rate for ESP32 series.</li>
+            <code>Serial.print<code</code>: Print variable values to serial monitor</li></ul>
+</div>
 
-    <div class="note-card">
-        <h4>6. Timing Methods: Blocking vs Non-Blocking</h4>
-        <ul>
-            <li><code>delay(ms)</code>: Blocking timing, pauses the entire program during waiting period, unsuitable for multi-task parallel control.</li>
-            <li><code>millis()</code>: Non-blocking timing, returns total running milliseconds after boot, allows multiple independent timing tasks at the same time without program pause.</li>
-        </ul>
-    </div>
+   <div class="note-card<h4>6. Timing Methods: Blocking vs Non-B</h4>
+<ul>
+           <code>delay</code>: Blocking timing, pauses the entire program during waiting period, unsuitable for multi-task parallel</li>
+           <code>mill</code>: Non-blocking timing, returns total running milliseconds after boot, allows multiple independent timing tasks at the same</li</ul></div>
 
-    <div class="note-card">
-        <h4>7. DC Motor L298N / L9110 Dual Pin Control Logic</h4>
-        <ul>
-            <li>A1A = HIGH, A1B = LOW: Motor forward rotation</li>
-            <li>A1A = LOW, A1B = HIGH: Motor reverse rotation</li>
-            <li>A1A = LOW, A1B = LOW: Motor power off, full stop</li>
-            <li>No PWM speed control implemented in this project, motor runs at full speed when activated.</li>
-        </ul>
-    </div>
-
-    <div class="note-card">
-        <h4>8. Data Type Basic Definitions</h4>
-        <ul>
-            <li><code>const int</code>: Fixed constant pin number, cannot be modified during program run.</li>
-            <li><code>int</code>: Integer variable, stores pin reading values, angles, counts.</li>
-            <li><code>bool</code>: Boolean variable, only stores two values: true / false, perfect for storing switch status.</li>
-            <li><code>unsigned long</code>: For millis() timestamp storage, large positive integer without negative range.</li>
-        </ul>
-    </div>
+<div class="note<h4>7. DC Motor L298N / L9110 Dual</h4<ul><li>A1A = HIGH, A1B = LOW: Motor forward</li>
+           <li>A1A = LOW, A1B = HIGH: Motor reverse rotation<li>A1A = LOW, A1B = LOW: Motor power off, full stop</li>
+            <li>No PWM speed control implemented in this project, motor runs at full speed when activated.</ul</div><div class="note-card">
+        <h4>8. Data</h4<ul><code</code>: Fixed constant pin number, cannot be modified during program run.<li</code>: Integer variable, stores pin reading values, angles, counts.</li>
+            <li><code>bool</code>: Boolean variable, only stores two values: true / false, perfect for storing switch</li>
+           <code>unsigned</code>: For millis() timestamp storage, large positive integer without negative range.</ul</div>
 </main>
-</body>
 </html>
