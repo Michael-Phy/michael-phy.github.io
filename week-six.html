@@ -27,6 +27,12 @@
             margin: 10px 0;
             max-width: 100%;
         }
+        img {
+            max-width: 600px;
+            margin: 12px 0;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +110,33 @@ void loop() {
         </ul>
         </p>
     </section>
+
+    <!-- Final Project：压力传感器测试与自锁系统扩展 -->
+    <section id="final-project">
+        <h3>Final Project Preview: Force Sensor Test and Self-Locking System</h3>
+
+        <h4>Project Overview</h4>
+        <p>This week I tested a force-sensitive sensor module as part of my final project development. The purpose of this test is to verify whether the system can detect changes in grip pressure and provide a corresponding output signal. This will later be developed into a self-locking system that can help stabilize the user's hand position when grip force decreases.</p>
+
+        <h4>Force Sensor Test</h4>
+        <p>In this test, a force sensor was connected to the microcontroller to read analog pressure data. When the applied pressure increases and exceeds a certain threshold, the LED will turn on. When the pressure decreases below the threshold, the LED will turn off. This test shows that the sensor can successfully convert physical pressure changes into digital output signals.</p>
+
+        <h4>Code and Serial Monitor</h4>
+        <p>The following image shows the Arduino IDE code and serial monitor output when the pressure sensor is detected. The serial monitor prints the real-time grip value, which can be used to observe pressure changes and adjust the threshold value.</p>
+        
+        <img src="69.png" alt="Arduino IDE code and serial monitor for pressure sensor">
+
+        <h4>Force Sensor Assembly Process</h4>
+        <p>The force sensor was assembled using copper foil and a pressure-sensitive structure. The assembly process shows how the conductive material and sensing area are arranged to detect hand pressure. This homemade sensor will be installed on the orthosis to monitor grip force during use.</p>
+        
+        <img src="4.jpg" alt="Force sensor assembly process">
+
+        <h4>Next Step: Self-Locking System</h4>
+        <p>The current LED indicator is only a simple output test. In the final project, the LED will be replaced by a self-locking mechanism. When the system detects that the grip pressure drops below a safe threshold, the microcontroller will send a signal to activate a locking component, such as a solenoid or a small motor, to hold the hand or object in a stable position.</p>
+
+        <p>This test is an important preparation for the final project, because it confirms that the pressure input, signal processing, and output control can work together. Later, I will continue to improve the sensor structure, adjust the threshold, and integrate the locking system into the orthosis.</p>
+    </section>
+
 </main>
 </body>
 </html>
