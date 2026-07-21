@@ -19,15 +19,20 @@
     <h2>Weekly Lab Notes & Work</h2>
 
     <section>
-        <h3>MVP: Minimum Vi Product Design</h3>
+        <h3>MVP: Minimum Viable Product Design</h3>
         <p>Input device: FSR pressure sensor</p>
         <p>Output device: Stepper motor</p>
         <p>Function logic: When the detected pressure value is low, the stepper motor rotates a larger angle to lock the spoon and prevent it from falling off; higher pressure corresponds to smaller rotation travel.</p>
         <p>Demo video link: <a href="https://www.bilibili.com/video/BV1jEKt6xENT/?spm_id_from=333.1387.homepage.video_card.click" target="_blank">Bilibili Demo Video</a></p>
+        <div style="margin-top:15px;">
+            <h4>3D Render of Hand Assembly</h4>
+            <img src="121212.png" alt="3D schematic of mechanical part installed on hand structure" style="max-width:700px; width:100%;">
+            <p><small>This image shows the final 3D schematic of the mechanism placed inside the hand assembly.</small></p>
+        </div>
     </section>
 
     <section>
-        <h3>Arduino Source Code </h3>
+        <h3>Arduino Source Code</h3>
 <pre>
 #include <AccelStepper.h>
 
