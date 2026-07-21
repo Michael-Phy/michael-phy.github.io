@@ -17,6 +17,79 @@
 </header>
 <main>
     <h2>Weekly Lab Notes & Work</h2>
+
+    <section>
+        <h3>MVP: Minimum Vi Product Design</h3>
+        <p>Input device: FSR pressure sensor</p>
+        <p>Output device: Stepper motor</p>
+        <p>Function logic: When the detected pressure value is low, the stepper motor rotates a larger angle to lock the spoon and prevent it from falling off; higher pressure corresponds to smaller rotation travel.</p>
+        <p>Demo video link: <a href="https://www.bilibili.com/video/BV1jEKt6xENT/?spm_id_from=333.1387.homepage.video_card.click" target="_blank">Bilibili Demo Video</a></p>
+    </section>
+
+    <section>
+        <h3>Arduino Source Code (No Chinese Comments)</h3>
+<pre>
+#include <AccelStepper.h>
+
+const int FSR_PIN = A1;
+const int stepPin = D7;
+const int dirPin = D8;
+
+AccelStepper stepper(1, stepPin, dirPin);
+
+const int GRIP_MIN = 500;
+const int GRIP_MAX = 3500;
+const int STEP_TWO_CIRCLE = 400;
+const int STEP_MIN = 50;
+
+unsigned long timeMark = 0;
+const unsigned long READ_INTERVAL = 4000;
+int stage = 0;
+
+void setup() {
+  pinMode(FSR_PIN, INPUT);
+  stepper.setMaxSpeed(1200.0);
+  stepper.setAcceleration(300.0);
+  stepper.setCurrentPosition(0);
+}
+
+void loop() {
+  stepper.run();
+
+  switch (stage)
+  {
+    case 0:
+      if (millis() - timeMark >= READ_INTERVAL)
+      {
+        timeMark = millis();
+        int fsrRaw = analogRead(FSR_PIN);
+        int fsrSafe = constrain(fsrRaw, GRIP_MIN, GRIP_MAX);
+        long targetPos = map(fsrSafe, GRIP_MIN, GRIP_MAX, STEP_TWO_CIRCLE, STEP_MIN);
+        stepper.moveTo(targetPos);
+        stage = 1;
+      }
+      break;
+
+    case 1:
+      if (stepper.distanceToGo() == 0 && millis() - timeMark >= 2000)
+      {
+        timeMark = millis();
+        stepper.moveTo(0);
+        stage = 2;
+      }
+      break;
+
+    case 2:
+      if (stepper.distanceToGo() == 0 && millis() - timeMark >= 2000)
+      {
+        timeMark = millis();
+        stage = 0;
+      }
+      break;
+  }
+}
+</pre>
+    </section>
 </main>
 </body>
 </html>
