@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10 Assignment | Machine Building</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        section {
+            border: 1px solid #333;
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 6px;
+        }
+        img {
+            max-width: 100%;
+            margin: 12px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Week 10 Assignment: Machine Building</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="final.html">Final Project Proposal</a>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Music Score Plotter Documentation</h2>
+        <p>This plotting machine is built to automatically draw hand-styled musical staff and musical notes on paper. It can visualize digital sheet music into physical artwork.</p>
+
+        <h3>System Workflow & Implementation</h3>
+        <p>We use the online conversion tool dxf2gcode to process files. First, the sheet music graphic is exported as a DXF vector file. The DXF file is imported into dxf2gcode, which converts the vector graphics into standard G-code motion commands.</p>
+        <img src="dxf.jpg" alt="dxf2gcode website interface for converting DXF files to G-code">
+        <p>Demo Video: <a href="https://www.bilibili.com/video/BV1TtGK6aEbx/?spm_id_from=333.1387.homepage.video_card.click" target="_blank">https://www.bilibili.com/video/BV1TtGK6aEbx/?spm_id_from=333.1387.homepage.video_card.click</a></p>
+
+        <p>The Xiao ESP32C3 microcontroller hosts a built-in web control website. Users paste the generated G-code into the webpage and send the data to the microcontroller.</p>
+        <p>The onboard program on Xiao ESP32C3 parses each G-code instruction. It drives the stepper motor system to move the drawing pen, tracing staff lines and musical notes on paper to recreate the complete sheet music.</p>
+    </section>
+</main>
+</body>
+</html>
