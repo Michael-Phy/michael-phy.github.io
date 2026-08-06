@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 9 Assignment — Networking & Cloud Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Week 9 Assignment</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="final.html">Final Project Proposal</a>
+    </nav>
+</header>
+<main>
+    <h2>Networking & Cloud‑based IoT Control</h2>
+
+    <section>
+        <h3>Project Overview</h3>
+        <p>This week I explored IoT networking using ESP32‑C3 combined with Firebase Realtime Database. The goal is to achieve cloud‑remote hardware control: send commands from a web client over the internet, store status inside the cloud database, and let the microcontroller continuously read database values to toggle physical hardware outputs. This establishes a bidirectional internet‑connected workflow for my physical‑computing prototype.</p>
+    </section>
+
+    <section>
+        <h3>System Workflow</h3>
+        <ol>
+            <li>ESP32‑C3 connects to local Wi‑Fi, then authenticates and connects to Firebase Realtime Database.</li>
+            <li>The microcontroller repeatedly fetches the <code>/LED_STATUS</code> string value stored on cloud server every one second.</li>
+            <li>A web frontend sends <code>ON</code> or <code>OFF</code> commands and writes those strings into Firebase database.</li>
+            <li>When ESP32 reads <code>ON</code>, it turns on the on‑board LED; reading <code>OFF</code> switches the LED off.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h3>Demonstration Video</h3>
+        <video controls width="720">
+            <source src="networking.mp4" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <p>The video shows full workflow: web interface sending commands, Firebase database value updating, and physical LED responding remotely.</p>
+    </section>
+
+    <section>
+        <h3>Arduino Firmware (ESP32‑C3)</h3>
+<pre><code>#include &lt;WiFi.h&gt;                                 // esp32 library
+#include &lt;FirebaseESP32.h&gt;                        // firebase library
+
+#define FIREBASE_HOST "https://acontroller-aadb8-default-rtdb.europe-west1.firebasedatabase.app/"
+#define FIREBASE_AUTH "cAdMvfIBB8BVwihI1A19RnIe37LriNSuFVNClYgs"
+#define WIFI_SSID "my_ssid"
+#define WIFI_PASSWORD "my_password"
+
+String fireString = "";
+int ledpin = 13;
+
+FirebaseData firebaseData;
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  pinMode(ledpin, OUTPUT);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+  Serial.print("Connecting to ");
+  Serial.print(WIFI_SSID);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println();
+  Serial.print("Connected to ");
+  Serial.println(WIFI_SSID);
+  Serial.print("IP Address is : ");
+  Serial.println(WiFi.localIP());
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.reconnectWiFi(true);
+  Firebase.set(firebaseData, "/LED_STATUS", "OFF");
+}
+
+void loop() {
+  Firebase.get(firebaseData, "/LED_STATUS");
+  fireString = firebaseData.stringData();
+  Serial.println(fireString);
+  
+  if (fireString == "ON") {
+    Serial.println("Led Turned ON");
+    digitalWrite(ledpin, HIGH);
+  }
+  else if (fireString == "OFF") {
+    Serial.println("Led Turned OFF");
+    digitalWrite(ledpin, LOW);
+  }
+  else {
+    Serial.println("Please send ON/OFF");
+  }
+  delay(1000);
+}
+</code></pre>
+        <p><strong>Important note:</strong> Before upload, you must replace <code>WIFI_SSID</code> and <code>WIFI_PASSWORD</code> with your actual Wi‑Fi credentials. The Firebase host and auth key are copied directly from your Firebase project console.</p>
+    </section>
+
+    <section>
+        <h3>Key Technical Challenges & Observations</h3>
+        <ul>
+            <li>Wi‑Fi reconnection handling: When local network drops, <code>Firebase.reconnectWiFi(true)</code> allows ESP32 to automatically rebuild connection after Wi‑Fi resumes.</li>
+            <li>Database security rules: Read‑write permission must be configured properly in Firebase console, otherwise ESP32 cannot pull or push database entries.</li>
+            <li>Data type matching: The firmware reads string‑type value. Mismatched data type (e.g. boolean / integer stored in database) will cause unexpected hardware behaviour.</li>
+            <li>Latency: There is small network delay between web button press and LED reaction, caused by cloud database round‑trip communication.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Future Extension for Final Project</h3>
+        <p>This cloud networking workflow can be adapted for my final mechanical prototype. Instead of only controlling an LED, I can store sensor readings (pressure / IMU angle data) into Firebase, and send remote commands to adjust stepper‑motor behaviour from web browser anywhere with internet access.</p>
+    </section>
+
+</main>
+</body>
+</html>
