@@ -3,54 +3,1616 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project Proposal</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>Parkinson’s Anti-Tremor Tableware Helper</title>
+
     <style>
-      
-        .device-image {
+        :root {
+            --navy: #173b57;
+            --blue: #2f6f94;
+            --light-blue: #eaf4fa;
+            --background: #f5f8fa;
+            --white: #ffffff;
+            --text: #202a33;
+            --muted: #5f6d78;
+            --border: #cbd9e2;
+            --code-background: #111827;
+            --code-text: #e6edf3;
+            --success-background: #edf8f1;
+            --success-border: #4c9b66;
+            --warning-background: #fff8e8;
+            --warning-border: #d79b2b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+        }
+
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 34px 6vw 24px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.2;
+        }
+
+        header p {
+            max-width: 850px;
+            margin: 12px 0 18px;
+            color: #d9e8f2;
+            font-size: 1.05rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            width: min(1180px, 92vw);
+            margin: 34px auto 70px;
+        }
+
+        section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 26px 0;
+            box-shadow: 0 7px 22px rgba(23, 59, 87, 0.06);
+        }
+
+        h2,
+        h3,
+        h4 {
+            color: var(--navy);
+            line-height: 1.3;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin-top: 34px;
+            font-size: 1.45rem;
+        }
+
+        h4 {
+            margin-top: 26px;
+        }
+
+        p {
+            margin: 14px 0;
+        }
+
+        strong {
+            color: var(--navy);
+        }
+
+        code {
+            font-family: Consolas, Monaco, "Courier New", monospace;
+        }
+
+        .project-summary {
+            font-size: 1.08rem;
+        }
+
+        .media {
             width: 100%;
-            max-width: 1100px;
-            margin: 24px auto;
+            max-width: 1050px;
             display: block;
-            border-radius: 6px;
+            margin: 24px auto;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #000;
+        }
+
+        .caption {
+            color: var(--muted);
+            font-size: 0.94rem;
+            text-align: center;
+            margin-top: -12px;
+        }
+
+        .callout {
+            background: var(--light-blue);
+            border-left: 5px solid var(--blue);
+            border-radius: 7px;
+            padding: 18px 20px;
+            margin: 22px 0;
+        }
+
+        .success {
+            background: var(--success-background);
+            border-left-color: var(--success-border);
+        }
+
+        .warning {
+            background: var(--warning-background);
+            border-left-color: var(--warning-border);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 680px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 13px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--light-blue);
+            color: var(--navy);
+        }
+
+        .system-flow {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .system-flow div {
+            position: relative;
+            background: var(--light-blue);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        pre {
+            background: var(--code-background);
+            color: var(--code-text);
+            border-radius: 10px;
+            padding: 24px;
+            overflow-x: auto;
+            line-height: 1.45;
+            font-size: 0.9rem;
+            tab-size: 2;
+        }
+
+        .small-code {
+            font-size: 0.95rem;
+        }
+
+        .contents {
+            columns: 2;
+            column-gap: 40px;
+        }
+
+        .contents a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .contents a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--navy);
+            color: #d9e8f2;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 850px) {
+            section {
+                padding: 21px;
+            }
+
+            .system-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .contents {
+                columns: 1;
+            }
         }
     </style>
 </head>
+
 <body>
+
 <header>
-    <h1>Final Project Proposal</h1>
+    <h1>Parkinson’s Anti-Tremor Tableware Helper</h1>
+
+    <p>
+        Final project proposal, prototype demonstration, hardware explanation,
+        control-system documentation, and complete Arduino code.
+    </p>
+
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
-        <a href="final.html">Final Project Proposal</a>
+        <a href="#overview">Overview</a>
+        <a href="#demo">Demo</a>
+        <a href="#documentation">Documentation</a>
+        <a href="#code">Final Code</a>
     </nav>
 </header>
 
 <main>
-    <h2>Three Project Options</h2>
 
-    <section>
-        <h3>1. Parkinson’s Anti-Tremor Tableware Helper</h3>
+    <section id="overview">
+        <h2>Project Overview</h2>
 
-        <img src="parkinson-assist.png" alt="Parkinson anti-tremor assist device diagram" class="device-image">
-        <p>This arm-mounted device is designed to assist individuals with Parkinson's disease in maintaining independence during meals. The padding gently cradles the user's arm, minimizing involuntary hand movements while eating. A contact sensor continuously monitors grip strength. When the strength fall below a predetermined value , the motor activates to lock chopsticks or spoons in place, preventing them from slipping.(the figure is generated by ai)</p>
+        <p class="project-summary">
+            This project is an arm-mounted tableware assistance prototype intended
+            to reduce the effect of involuntary rotational movement while a user is
+            eating. A force-sensitive resistor detects whether the user is applying
+            pressure to the handle. Once activated, an Adafruit BNO055 absolute
+            orientation sensor measures rotation around the selected X-axis.
+        </p>
+
+        <p class="project-summary">
+            The XIAO ESP32C3 processes the sensor data and converts the measured
+            angular change into STEP pulses for a 17HS19-2004S1 stepper motor.
+            The motor then moves in the opposite direction in an attempt to compensate
+            for the detected motion and stabilize the attached spoon or chopsticks.
+        </p>
+
+        <div class="callout warning">
+            <strong>Important:</strong>
+            this is an educational engineering prototype. It is not a certified
+            medical device and is not intended to diagnose, treat, or replace
+            professional medical care.
+        </div>
     </section>
 
-   
     <section>
-        <h3>2. Posture Correction Wearable Device</h3>
-        <img src="posture-device.png" alt="Posture correction wearable device" class="device-image">
-        <p>When the user is studying ,if the monitored angles exceed the healthy limits, the sensors trigger the vibration motors. These motors then generate gentle vibration signals to discreetly alert the user to adjust their posture. This device aims to alleviate physical strain often associated with prolonged screen time and desk work.</p>
+        <h2>Page Contents</h2>
+
+        <div class="contents">
+            <p><a href="#demo">1. Demonstration Video</a></p>
+            <p><a href="#system">2. Complete System Structure</a></p>
+            <p><a href="#imu">3. BNO055 IMU</a></p>
+            <p><a href="#wiring">4. IMU and Controller Wiring</a></p>
+            <p><a href="#axis">5. X-Axis Angle Measurement</a></p>
+            <p><a href="#alpha">6. Alpha-Angle Convention</a></p>
+            <p><a href="#zero">7. Initial Zero Definition</a></p>
+            <p><a href="#fsr">8. Pressure Sensor</a></p>
+            <p><a href="#motor">9. Stepper Motor Conversion</a></p>
+            <p><a href="#realtime">10. 20 Millisecond Control Cycle</a></p>
+            <p><a href="#filter">11. Filtering and Dead Zone</a></p>
+            <p><a href="#limits">12. Software Limits</a></p>
+            <p><a href="#code">13. Complete Final Code</a></p>
+            <p><a href="#testing">14. Testing Procedure</a></p>
+            <p><a href="#limitations">15. Limitations and Improvements</a></p>
+        </div>
     </section>
-    <section>
-        <h3>3. Adjustable Head-Mounted Eye Protection Magnifier</h3>
-        <img src="eye-magnifier.png" alt="Head-mounted eye protection magnifier" class="device-image">
-<p>This wearable optical device is inspired by my personal eye health experience. Due to long hours of studying and poor reading posture, I have developed severe myopia and frequent eye strain. A large number of teenagers have the same problem of leaning too close to books and electronic screens when studying, which leads to continuous deterioration of eyesight. This adjustable head-mounted magnifier can standardize the user's reading distance, avoid excessive eye focusing pressure, and greatly reduce eye fatigue during long-term study. Its lightweight and adjustable frame design ensures comfortable wearing for a long time, effectively helping teenagers protect their eyesight and improve learning posture.While reading books or doing projects, users can adjust the distance between eyes and lens.Moreover, if the information detected by the light sensor shows that the sorrounding is black, their will be reading light for the user.</p>
-    <div class="preferred-project">
-        <h3>My Preferred Project</h3>
-        <p>Among these three proposals, I will prefer the first one.</p>
-    </div>
+
+    <section id="demo">
+        <h2>Demonstration Video</h2>
+
+        <p>
+            The following video demonstrates the prototype and explains how the
+            pressure sensor, IMU, XIAO ESP32C3, stepper driver, and motor work
+            together.
+        </p>
+
+        <video class="media" controls preload="metadata">
+            <source src="demo.mp4" type="video/mp4">
+
+            Your browser does not support HTML5 video.
+            Please open the file named demo.mp4 directly.
+        </video>
+
+        <p class="caption">
+            Place <strong>demo.mp4</strong> in the same GitHub folder as this HTML file.
+        </p>
+    </section>
+
+    <section id="documentation">
+        <h2>Technical Documentation</h2>
+
+        <h3 id="system">1. Complete System Structure</h3>
+
+        <p>
+            The complete system contains four main functional parts:
+        </p>
+
+        <div class="system-flow">
+            <div>FSR Detects Pressure</div>
+            <div>BNO055 Measures Rotation</div>
+            <div>XIAO Calculates Angle Error</div>
+            <div>Driver Receives STEP/DIR</div>
+            <div>Motor Applies Compensation</div>
+        </div>
+
+        <p>
+            The force-sensitive resistor acts as an activation control. The system
+            does not continuously compensate when the handle is not being used.
+            Once sufficient pressure is detected, the current IMU orientation is
+            recorded and defined as the starting zero position.
+        </p>
+
+        <p>
+            After activation, the IMU is read every 20 milliseconds. The program
+            calculates the relative X-axis rotation from the stored zero, applies
+            filtering, converts the angle into motor steps, and continually updates
+            the motor target.
+        </p>
+
+        <h3 id="imu">2. BNO055 Absolute Orientation IMU</h3>
+
+        <img
+            src="imu.png"
+            alt="BNO055 IMU wiring and orientation-axis explanation"
+            class="media"
+        >
+
+        <p class="caption">
+            Place <strong>imu.png</strong> in the same GitHub folder as this HTML file.
+        </p>
+
+        <p>
+            The project uses the Adafruit BNO055 Absolute Orientation IMU. The module
+            combines three sensing systems:
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Internal Sensor</th>
+                        <th>Measured Quantity</th>
+                        <th>Role in Orientation Estimation</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Accelerometer</td>
+                        <td>Linear acceleration and gravity direction</td>
+                        <td>
+                            Helps determine which direction is downward and supports
+                            pitch and roll estimation.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Gyroscope</td>
+                        <td>Angular velocity</td>
+                        <td>
+                            Detects how quickly and in which direction the sensor is rotating.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Magnetometer</td>
+                        <td>Magnetic-field direction</td>
+                        <td>
+                            Supports absolute heading estimation relative to the surrounding
+                            magnetic field.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            The BNO055 performs sensor fusion internally. Instead of requiring the
+            XIAO to combine all raw accelerometer, gyroscope, and magnetometer values,
+            the program can request an estimated orientation from the sensor.
+        </p>
+
+        <h3 id="wiring">3. IMU Wiring</h3>
+
+        <p>
+            The BNO055 communicates with the XIAO ESP32C3 through I²C. Only four
+            IMU connections are required for the current program.
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>BNO055 Pin</th>
+                        <th>XIAO ESP32C3 Pin</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>VIN</td>
+                        <td>3V3</td>
+                        <td>Provides electrical power to the BNO055 breakout board.</td>
+                    </tr>
+
+                    <tr>
+                        <td>GND</td>
+                        <td>GND</td>
+                        <td>
+                            Provides the common electrical reference required for both
+                            power and I²C communication.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>SDA</td>
+                        <td>D4</td>
+                        <td>I²C data signal.</td>
+                    </tr>
+
+                    <tr>
+                        <td>SCL</td>
+                        <td>D5</td>
+                        <td>I²C clock signal.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout">
+            <strong>The IMU ground must be connected.</strong>
+            VIN, SDA, and SCL cannot function correctly without a shared ground
+            reference between the BNO055 and the XIAO.
+        </div>
+
+        <p>
+            The other BNO055 pins are not used in this configuration:
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pin</th>
+                        <th>Current Use</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>3VO</td>
+                        <td>
+                            Not connected. It is a 3.3 V output, not the main power input.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>RST</td>
+                        <td>Not connected. Software initialization is used.</td>
+                    </tr>
+
+                    <tr>
+                        <td>PS0 and PS1</td>
+                        <td>Not connected. The module remains in the default communication mode.</td>
+                    </tr>
+
+                    <tr>
+                        <td>INT</td>
+                        <td>Not connected. The program uses timed polling rather than an interrupt.</td>
+                    </tr>
+
+                    <tr>
+                        <td>ADR</td>
+                        <td>
+                            Not connected. The default I²C address of 0x28 is used.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 id="axis">4. Measuring Rotation Around the X-Axis</h3>
+
+        <p>
+            This project considers only rotation around the selected X-axis. The
+            sensor must be mounted so that its physical X-axis is aligned with the
+            mechanical axis that the project is intended to measure.
+        </p>
+
+        <p>
+            The program reads a quaternion from the BNO055 and converts the quaternion
+            into a roll angle around the X-axis. The conversion uses:
+        </p>
+
+        <pre class="small-code"><code>roll = atan2(
+    2(wx + yz),
+    1 - 2(x² + y²)
+)</code></pre>
+
+        <p>
+            Internally, the angle is represented as a signed value:
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Internal Signed Angle</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>One X-axis rotation direction</td>
+                        <td>Positive value, such as +70°</td>
+                    </tr>
+
+                    <tr>
+                        <td>Opposite X-axis rotation direction</td>
+                        <td>Negative value, such as −70°</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 id="alpha">5. Alpha-Angle Convention</h3>
+
+        <p>
+            For project display and explanation, the signed X-axis angle can also be
+            represented using an alpha value between 0° and 180°.
+        </p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Physical Rotation</th>
+                        <th>Signed Angle</th>
+                        <th>Alpha Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>70° in the positive direction</td>
+                        <td>+70°</td>
+                        <td>70°</td>
+                    </tr>
+
+                    <tr>
+                        <td>70° in the opposite direction</td>
+                        <td>−70°</td>
+                        <td>110°</td>
+                    </tr>
+
+                    <tr>
+                        <td>30° in the opposite direction</td>
+                        <td>−30°</td>
+                        <td>150°</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>
+            The conversion rule is:
+        </p>
+
+        <pre class="small-code"><code>If signedAngle is positive:
+    alpha = signedAngle
+
+If signedAngle is negative:
+    alpha = 180 + signedAngle</code></pre>
+
+        <p>
+            Therefore, an alpha value of 110° corresponds to 70° in the opposite
+            direction:
+        </p>
+
+        <pre class="small-code"><code>180° - 110° = 70°</code></pre>
+
+        <p>
+            The motor-control calculations still use the signed value because a
+            positive or negative number directly represents direction.
+        </p>
+
+        <h3 id="zero">6. Defining the Initial Angle as Zero</h3>
+
+        <p>
+            When pressure is first detected, the current IMU orientation is recorded.
+            The sensor’s absolute value is not physically changed, but the program
+            stores that value as a software zero.
+        </p>
+
+        <p>
+            For example, assume that the IMU physically reads +32° when the user first
+            presses the force sensor:
+        </p>
+
+        <pre class="small-code"><code>imuZeroAngle = 32°</code></pre>
+
+        <p>
+            At that moment, the relative angle is:
+        </p>
+
+        <pre class="small-code"><code>relativeAngle = currentAngle - imuZeroAngle
+relativeAngle = 32° - 32°
+relativeAngle = 0°</code></pre>
+
+        <p>
+            If the sensor later reads +47°, the relative motion becomes:
+        </p>
+
+        <pre class="small-code"><code>relativeAngle = 47° - 32°
+relativeAngle = +15°</code></pre>
+
+        <p>
+            The motor target is then set to the opposite direction:
+        </p>
+
+        <pre class="small-code"><code>motorTargetAngle = -15°</code></pre>
+
+        <h3 id="fsr">7. FSR Pressure Activation</h3>
+
+        <p>
+            The force-sensitive resistor is connected to analog pin A1 through a
+            voltage-divider circuit. The program reads the raw analog value and
+            converts it into an estimated pressure weight using the calibration
+            equation developed during testing:
+        </p>
+
+        <pre class="small-code"><code>weight = 0.1424 × rawValue - 177.3</code></pre>
+
+        <p>
+            Any negative result is changed to zero:
+        </p>
+
+        <pre class="small-code"><code>if (weight &lt; 0) {
+    weight = 0;
+}</code></pre>
+
+        <p>
+            When the calculated pressure exceeds the threshold, real-time compensation
+            begins. When pressure is removed, the system stops updating the compensation
+            target and requests the motor to stop.
+        </p>
+
+        <div class="callout warning">
+            The pressure threshold may need to be increased if the sensor activates
+            because of electrical noise or light accidental contact.
+        </div>
+
+        <h3 id="motor">8. Stepper Motor Angle Conversion</h3>
+
+        <p>
+            The project uses a 17HS19-2004S1 stepper motor. During testing, 200 STEP
+            pulses caused exactly one full motor revolution. This confirms that the
+            current driver configuration is operating in full-step mode.
+        </p>
+
+        <pre class="small-code"><code>200 steps = 360°
+1 step = 1.8°
+steps per degree = 200 / 360
+steps per degree ≈ 0.5556</code></pre>
+
+        <p>
+            The BNO055 produces an angle, while the motor driver requires discrete
+            STEP pulses. The software converts the desired motor angle into steps:
+        </p>
+
+        <pre class="small-code"><code>targetSteps =
+    motorTargetAngle × stepsPerDegree</code></pre>
+
+        <p>
+            Example: the IMU detects a relative movement of +30°.
+        </p>
+
+        <pre class="small-code"><code>motorTargetAngle = -30°
+
+targetSteps =
+    -30 × 200 / 360
+
+targetSteps ≈ -16.67
+
+rounded target = -17 steps</code></pre>
+
+        <p>
+            Seventeen full steps correspond to:
+        </p>
+
+        <pre class="small-code"><code>17 × 1.8° = 30.6°</code></pre>
+
+        <p>
+            This creates a small rounding difference because the motor can only move
+            in complete 1.8° increments in full-step mode.
+        </p>
+
+        <h3 id="realtime">9. Real-Time 20 Millisecond Control Cycle</h3>
+
+        <p>
+            An earlier prototype measured the IMU only once every ten seconds. That
+            approach was useful for basic testing, but it was too slow for responsive
+            motion compensation.
+        </p>
+
+        <p>
+            The final program uses a 20 millisecond control interval:
+        </p>
+
+        <pre class="small-code"><code>CONTROL_INTERVAL_MS = 20</code></pre>
+
+        <p>
+            This produces:
+        </p>
+
+        <pre class="small-code"><code>1000 ms / 20 ms = 50 updates per second</code></pre>
+
+        <p>
+            During every control update, the program:
+        </p>
+
+        <div class="system-flow">
+            <div>Reads the Current IMU Angle</div>
+            <div>Applies the Low-Pass Filter</div>
+            <div>Subtracts the Software Zero</div>
+            <div>Calculates the Opposite Motor Angle</div>
+            <div>Updates the Motor Target Position</div>
+        </div>
+
+        <p>
+            The motor does not have to complete the previous movement before a new
+            target is calculated. The command <code>stepper.moveTo()</code> can update
+            the target while the motor is already moving.
+        </p>
+
+        <p>
+            The function <code>stepper.run()</code> is called during every pass through
+            <code>loop()</code>. This is necessary because AccelStepper generates the
+            motor’s STEP pulses through repeated calls to <code>run()</code>.
+        </p>
+
+        <h3 id="filter">10. Filtering and Dead Zone</h3>
+
+        <p>
+            IMU readings naturally contain small fluctuations. Without filtering,
+            those fluctuations could cause the motor to repeatedly move between
+            neighboring full steps.
+        </p>
+
+        <h4>Low-Pass Filter</h4>
+
+        <p>
+            The program uses a first-order low-pass filter:
+        </p>
+
+        <pre class="small-code"><code>filteredAngle =
+    filteredAngle +
+    FILTER_ALPHA ×
+    (measuredAngle - filteredAngle)</code></pre>
+
+        <p>
+            The filter coefficient is currently:
+        </p>
+
+        <pre class="small-code"><code>FILTER_ALPHA = 0.35</code></pre>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Filter Value</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Larger value</td>
+                        <td>Faster response but more visible noise.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Smaller value</td>
+                        <td>Smoother response but more delay.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Angle Dead Zone</h4>
+
+        <p>
+            Angular changes smaller than 0.4° are ignored:
+        </p>
+
+        <pre class="small-code"><code>ANGLE_DEADZONE = 0.4°</code></pre>
+
+        <p>
+            This dead zone prevents tiny sensor variations from repeatedly changing
+            the motor target.
+        </p>
+
+        <h3 id="limits">11. Software Motor Limits</h3>
+
+        <p>
+            The program limits the motor to ±90° relative to its startup position.
+            In full-step mode:
+        </p>
+
+        <pre class="small-code"><code>90° × 200 / 360 = 50 steps</code></pre>
+
+        <p>
+            Therefore, the permitted software range is:
+        </p>
+
+        <pre class="small-code"><code>-50 steps to +50 steps</code></pre>
+
+        <div class="callout warning">
+            The software does not know the real mechanical center of the mechanism.
+            The motor should be positioned near the center of its safe movement range
+            before the controller is powered.
+        </div>
+    </section>
+
+    <section id="code">
+        <h2>Complete Final Arduino Code</h2>
+
+        <p>
+            This is the final real-time version with a 20 millisecond control interval.
+            All comments inside the Arduino code are in English.
+        </p>
+
+<pre><code>#include &lt;Wire.h&gt;
+#include &lt;Adafruit_BNO055.h&gt;
+#include &lt;Adafruit_Sensor.h&gt;
+#include &lt;utility/imumaths.h&gt;
+#include &lt;AccelStepper.h&gt;
+#include &lt;math.h&gt;
+
+#define I2C_SDA D4
+#define I2C_SCL D5
+
+const int FSR_PIN = A1;
+const int STEP_PIN = D7;
+const int DIR_PIN = D8;
+
+AccelStepper stepper(
+  AccelStepper::DRIVER,
+  STEP_PIN,
+  DIR_PIN
+);
+
+Adafruit_BNO055 bno =
+  Adafruit_BNO055(55, 0x28, &amp;Wire);
+
+const float FSR_K = 0.1424f;
+const float FSR_B = -177.3f;
+
+/*
+  Increase this value if the FSR activates too easily.
+  The value is measured in fitted grams.
+*/
+const float PRESSURE_THRESHOLD_GRAMS = 0.0f;
+
+/*
+  The 17HS19-2004S1 completed one full revolution
+  after 200 STEP pulses during testing.
+  The driver is therefore operating in full-step mode.
+*/
+const float FULL_STEPS_PER_REVOLUTION = 200.0f;
+const float MICROSTEPS = 1.0f;
+const float GEAR_RATIO = 1.0f;
+
+const float STEPS_PER_DEGREE =
+  FULL_STEPS_PER_REVOLUTION *
+  MICROSTEPS *
+  GEAR_RATIO /
+  360.0f;
+
+const float MAX_SPEED = 350.0f;
+const float ACCELERATION = 250.0f;
+
+/*
+  Use -1.0 for opposite-direction compensation.
+  Change this to +1.0 if the physical direction is reversed.
+*/
+const float MOTOR_DIRECTION = -1.0f;
+
+const float ANGLE_DEADZONE = 0.4f;
+
+const float MAX_MOTOR_ANGLE = 90.0f;
+
+const long MAX_MOTOR_STEPS =
+  lroundf(
+    MAX_MOTOR_ANGLE *
+    STEPS_PER_DEGREE
+  );
+
+/*
+  Twenty milliseconds produces fifty control updates per second.
+*/
+const unsigned long CONTROL_INTERVAL_MS = 20UL;
+
+/*
+  Serial output is slower than the control loop to reduce overhead.
+*/
+const unsigned long PRINT_INTERVAL_MS = 100UL;
+
+/*
+  A larger filter value responds faster.
+  A smaller filter value produces smoother data.
+*/
+const float FILTER_ALPHA = 0.35f;
+
+unsigned long lastControlTime = 0;
+unsigned long lastPrintTime = 0;
+
+bool controlActive = false;
+
+float imuZeroAngle = 0.0f;
+float filteredAngle = 0.0f;
+
+long motorSessionOrigin = 0;
+
+float latestAlpha = 0.0f;
+float latestRelativeAngle = 0.0f;
+float latestWeight = 0.0f;
+
+long latestTargetSteps = 0;
+
+/*
+  Normalize an angle to the range from -180 to +180 degrees.
+*/
+float wrapTo180(float angle) {
+  while (angle &gt; 180.0f) {
+    angle -= 360.0f;
+  }
+
+  while (angle &lt; -180.0f) {
+    angle += 360.0f;
+  }
+
+  return angle;
+}
+
+/*
+  Read the FSR and apply the fitted calibration equation.
+*/
+float readFSRWeight(int &amp;rawValue) {
+  rawValue = analogRead(FSR_PIN);
+
+  float weight =
+    FSR_K * rawValue +
+    FSR_B;
+
+  if (weight &lt; 0.0f) {
+    weight = 0.0f;
+  }
+
+  return weight;
+}
+
+/*
+  Read the BNO055 quaternion and calculate roll
+  around the selected X-axis.
+*/
+float readRawRollX() {
+  imu::Quaternion q =
+    bno.getQuat();
+
+  double w = q.w();
+  double x = q.x();
+  double y = q.y();
+  double z = q.z();
+
+  double numerator =
+    2.0 * (w * x + y * z);
+
+  double denominator =
+    1.0 -
+    2.0 * (x * x + y * y);
+
+  double rollRadians =
+    atan2(
+      numerator,
+      denominator
+    );
+
+  float rollDegrees =
+    rollRadians *
+    180.0f /
+    PI;
+
+  return wrapTo180(
+    rollDegrees
+  );
+}
+
+/*
+  Return the signed X-axis angle.
+
+  Positive example:
+  signed angle = +70 degrees
+  alpha = 70 degrees
+
+  Negative example:
+  signed angle = -70 degrees
+  alpha = 110 degrees
+*/
+float readSignedXAngle(
+  float &amp;alphaOut
+) {
+  float signedAngle =
+    readRawRollX();
+
+  signedAngle =
+    constrain(
+      signedAngle,
+      -90.0f,
+      90.0f
+    );
+
+  if (signedAngle &gt;= 0.0f) {
+    alphaOut =
+      signedAngle;
+  } else {
+    alphaOut =
+      180.0f +
+      signedAngle;
+  }
+
+  return signedAngle;
+}
+
+/*
+  Average several readings when pressure first activates
+  to establish a more stable software zero.
+*/
+float readInitialZeroAngle() {
+  const int SAMPLE_COUNT = 5;
+
+  float total = 0.0f;
+
+  for (
+    int i = 0;
+    i &lt; SAMPLE_COUNT;
+    i++
+  ) {
+    float temporaryAlpha = 0.0f;
+
+    total +=
+      readSignedXAngle(
+        temporaryAlpha
+      );
+
+    delay(4);
+  }
+
+  return
+    total /
+    SAMPLE_COUNT;
+}
+
+/*
+  Limit the motor target to the permitted software range.
+*/
+long limitMotorTarget(
+  long target
+) {
+  if (
+    target &gt;
+    MAX_MOTOR_STEPS
+  ) {
+    return MAX_MOTOR_STEPS;
+  }
+
+  if (
+    target &lt;
+    -MAX_MOTOR_STEPS
+  ) {
+    return -MAX_MOTOR_STEPS;
+  }
+
+  return target;
+}
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  pinMode(
+    FSR_PIN,
+    INPUT
+  );
+
+  /*
+    BNO055 I2C connections:
+    SDA to D4
+    SCL to D5
+  */
+  Wire.begin(
+    I2C_SDA,
+    I2C_SCL
+  );
+
+  Wire.setClock(
+    100000
+  );
+
+  stepper.setMaxSpeed(
+    MAX_SPEED
+  );
+
+  stepper.setAcceleration(
+    ACCELERATION
+  );
+
+  /*
+    The startup motor position becomes position zero.
+  */
+  stepper.setCurrentPosition(
+    0
+  );
+
+  if (!bno.begin()) {
+    Serial.println(
+      "ERROR: BNO055 not detected."
+    );
+
+    Serial.println(
+      "Check VIN, GND, SDA, and SCL."
+    );
+
+    while (true) {
+      delay(1000);
+    }
+  }
+
+  delay(1000);
+
+  bno.setExtCrystalUse(
+    true
+  );
+
+  Serial.println(
+    "BNO055 detected."
+  );
+
+  Serial.println(
+    "Real-time control rate: 50 Hz."
+  );
+
+  Serial.println(
+    "Waiting for FSR pressure."
+  );
+
+  Serial.print(
+    "Steps per degree: "
+  );
+
+  Serial.println(
+    STEPS_PER_DEGREE,
+    6
+  );
+
+  Serial.print(
+    "Motor limit: +/-"
+  );
+
+  Serial.print(
+    MAX_MOTOR_STEPS
+  );
+
+  Serial.println(
+    " steps"
+  );
+}
+
+void loop() {
+  /*
+    This function must be called as frequently as possible.
+  */
+  stepper.run();
+
+  int fsrRaw = 0;
+
+  latestWeight =
+    readFSRWeight(
+      fsrRaw
+    );
+
+  bool pressureActive =
+    latestWeight &gt;
+    PRESSURE_THRESHOLD_GRAMS;
+
+  /*
+    Stop compensation when pressure is removed.
+  */
+  if (!pressureActive) {
+    if (controlActive) {
+      controlActive = false;
+
+      stepper.stop();
+
+      Serial.println(
+        "FSR released."
+      );
+
+      Serial.println(
+        "Real-time compensation stopped."
+      );
+    }
+
+    return;
+  }
+
+  /*
+    Record a new software zero when pressure first activates.
+  */
+  if (!controlActive) {
+    controlActive = true;
+
+    imuZeroAngle =
+      readInitialZeroAngle();
+
+    filteredAngle =
+      imuZeroAngle;
+
+    motorSessionOrigin =
+      stepper.currentPosition();
+
+    latestRelativeAngle =
+      0.0f;
+
+    lastControlTime =
+      millis();
+
+    lastPrintTime =
+      millis();
+
+    Serial.println(
+      "FSR pressed."
+    );
+
+    Serial.print(
+      "IMU zero angle: "
+    );
+
+    Serial.println(
+      imuZeroAngle,
+      2
+    );
+
+    Serial.println(
+      "Current IMU position is defined as 0 degrees."
+    );
+
+    return;
+  }
+
+  unsigned long now =
+    millis();
+
+  /*
+    Update the orientation and motor target every twenty milliseconds.
+  */
+  if (
+    now - lastControlTime &gt;=
+    CONTROL_INTERVAL_MS
+  ) {
+    lastControlTime =
+      now;
+
+    float currentAlpha =
+      0.0f;
+
+    float measuredAngle =
+      readSignedXAngle(
+        currentAlpha
+      );
+
+    /*
+      Apply a low-pass filter using the wrapped angle difference.
+    */
+    float filterDifference =
+      wrapTo180(
+        measuredAngle -
+        filteredAngle
+      );
+
+    filteredAngle =
+      wrapTo180(
+        filteredAngle +
+        FILTER_ALPHA *
+        filterDifference
+      );
+
+    /*
+      Calculate the angle relative to the position
+      recorded when the FSR was first pressed.
+    */
+    float relativeAngle =
+      wrapTo180(
+        filteredAngle -
+        imuZeroAngle
+      );
+
+    latestAlpha =
+      currentAlpha;
+
+    latestRelativeAngle =
+      relativeAngle;
+
+    /*
+      Ignore very small angular changes.
+    */
+    if (
+      fabsf(relativeAngle) &lt;=
+      ANGLE_DEADZONE
+    ) {
+      relativeAngle =
+        0.0f;
+    }
+
+    /*
+      Reverse the IMU angle to create compensation.
+    */
+    float motorTargetAngle =
+      MOTOR_DIRECTION *
+      relativeAngle;
+
+    /*
+      Convert the desired angle into motor STEP pulses.
+    */
+    float targetStepsFloat =
+      motorSessionOrigin +
+      motorTargetAngle *
+      STEPS_PER_DEGREE;
+
+    long targetSteps =
+      lroundf(
+        targetStepsFloat
+      );
+
+    targetSteps =
+      limitMotorTarget(
+        targetSteps
+      );
+
+    latestTargetSteps =
+      targetSteps;
+
+    /*
+      Continuously update the motor target.
+      The motor does not need to reach the previous
+      target before receiving a new target.
+    */
+    stepper.moveTo(
+      targetSteps
+    );
+  }
+
+  /*
+    Print diagnostic information every one hundred milliseconds.
+  */
+  if (
+    now - lastPrintTime &gt;=
+    PRINT_INTERVAL_MS
+  ) {
+    lastPrintTime =
+      now;
+
+    Serial.print(
+      "Weight: "
+    );
+
+    Serial.print(
+      latestWeight,
+      1
+    );
+
+    Serial.print(
+      " g"
+    );
+
+    Serial.print(
+      " | Alpha: "
+    );
+
+    Serial.print(
+      latestAlpha,
+      2
+    );
+
+    Serial.print(
+      " deg"
+    );
+
+    Serial.print(
+      " | Relative X: "
+    );
+
+    Serial.print(
+      latestRelativeAngle,
+      2
+    );
+
+    Serial.print(
+      " deg"
+    );
+
+    Serial.print(
+      " | Target: "
+    );
+
+    Serial.print(
+      latestTargetSteps
+    );
+
+    Serial.print(
+      " steps"
+    );
+
+    Serial.print(
+      " | Current: "
+    );
+
+    Serial.println(
+      stepper.currentPosition()
+    );
+  }
+}</code></pre>
+    </section>
+
+    <section id="testing">
+        <h2>Testing Procedure</h2>
+
+        <ol>
+            <li>
+                Position the motor near the center of its safe mechanical range.
+            </li>
+
+            <li>
+                Verify the BNO055 wiring:
+                VIN to 3V3, GND to GND, SDA to D4, and SCL to D5.
+            </li>
+
+            <li>
+                Verify the stepper-driver wiring:
+                STEP to D7 and DIR to D8.
+            </li>
+
+            <li>
+                Upload the Arduino program to the XIAO ESP32C3.
+            </li>
+
+            <li>
+                Open the Serial Monitor and select 115200 baud.
+            </li>
+
+            <li>
+                Confirm that the monitor displays:
+                <code>BNO055 detected.</code>
+            </li>
+
+            <li>
+                Press the FSR and keep the device still while the software zero is recorded.
+            </li>
+
+            <li>
+                Slowly rotate the IMU around the selected X-axis.
+            </li>
+
+            <li>
+                Confirm that the stepper motor moves in the opposite direction.
+            </li>
+
+            <li>
+                If the motor moves in the same direction, change:
+                <code>MOTOR_DIRECTION = -1.0f</code>
+                to
+                <code>MOTOR_DIRECTION = +1.0f</code>.
+            </li>
+
+            <li>
+                Release the FSR and confirm that real-time compensation stops.
+            </li>
+
+            <li>
+                Confirm that the target never exceeds the ±50-step software limit.
+            </li>
+        </ol>
+    </section>
+
+    <section id="limitations">
+        <h2>Limitations and Future Improvements</h2>
+
+        <h3>Full-Step Resolution</h3>
+
+        <p>
+            The motor currently moves in 1.8° full-step increments. Even though the
+            IMU is read 50 times per second, the motor cannot physically make movements
+            smaller than one full step.
+        </p>
+
+        <p>
+            A future version could use 1/8 or 1/16 microstepping. The driver hardware
+            would need to be configured for microstepping, and the
+            <code>MICROSTEPS</code> value in the program would need to be changed to
+            match.
+        </p>
+
+        <h3>Mechanical Backlash and Flexibility</h3>
+
+        <p>
+            Loose joints, flexible mounting material, and mechanical backlash can
+            reduce the accuracy of the compensation. The IMU should be mounted firmly,
+            and the motor shaft should be supported so that it does not carry excessive
+            side load.
+        </p>
+
+        <h3>No Physical Homing Sensor</h3>
+
+        <p>
+            The current system defines the motor’s startup position as zero. It does
+            not use a limit switch or encoder to confirm the actual mechanical
+            position. Future versions should include physical end stops or a homing
+            procedure.
+        </p>
+
+        <h3>Control Method</h3>
+
+        <p>
+            The present system directly maps measured angle to motor target position.
+            A more advanced version could use closed-loop PID or PD control, motor
+            feedback, and higher-resolution sensing.
+        </p>
+
+        <h3>Human-Factors Testing</h3>
+
+        <p>
+            The comfort, weight, noise level, vibration, cleaning requirements, and
+            safety of the wearable structure require additional testing. Future
+            prototypes should focus on reducing weight and improving comfort while
+            maintaining mechanical stability.
+        </p>
+    </section>
+
 </main>
+
+<footer>
+    Parkinson’s Anti-Tremor Tableware Helper — Final Project Documentation
+</footer>
 
 </body>
 </html>
